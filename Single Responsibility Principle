@@ -1,0 +1,84 @@
+As per the single responsibility principle 
+A class should have only one reason to change
+Which means, every module or class should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class.
+Encapsulation is one of the fundamentals of OOP. At this moment, understanding more about encapsulation is out of scope of this session.
+However, We strongly recommend you to refer to the C# tutorial playlist for more details on Object oriented principles.
+Now you might be wondering what do we achieve with the Single Responsibility Principle or rather with the SOLID Design Principles. 
+
+Let's first understand the motivation behind the usage of SOLID Principles
+
+In any enterprise software application development when we design and develop software systems, we need to account the below factors during the development cycle. 
+Maintainability : Maintainable systems are very important to the organisations.
+Testability : Test driven development (TDD) is required when we design and develop large scale systems
+Flexibility and Extensibility : Flexibility and extensibility is a very much desirable factor of enterprise applications.Hence we should design the application to make it flexible so that it can be adapt to work in different ways and extensible so that we can add new features easily. 
+Parallel Development : It is one of the key features in the application development as it is not practical to have the entire development team working simultaneously on the same feature or component. 
+
+ 
+Loose Coupling : We can address many of the requirements listed above by ensuring that our design results in an application that loosely couples many parts that makes up the application.
+SOLID Principles and Design Patterns plays a key role in achieving all of the above points.
+
+In Single Responsibility Principle 
+Each class and module should focus on a single task at a time
+Everything in the class should be related to that single purpose
+There can be many members in the class as long as they related to the single responsibility
+With SRP, classes become smaller and cleaner
+Code is less fragile 
+Hence we can say that Single Responsibility Principle achieves the motivation points that we have just discussed.
+
+Below code demonstrates how we can achieve Single Responsibility Principle
+
+Code before Single Responsibility Segregation 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SRPDemo
+{
+    interface IUser
+    {
+        bool Login(string username, string password);
+        bool Register(string username,
+            string password, string email);
+        void LogError(string error);
+        bool SendEmail(string emailContent);
+    }
+}
+
+Code after Single Responsibility Segregation 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SRPDemo
+{
+    interface IUser
+    {
+        bool Login(string username, string password);
+        bool Register(string username,
+            string password, string email);
+    }
+    interface ILogger
+    {
+        void LogError(string error);
+    }
+
+    interface IEmail
+    {
+        bool SendEmail(string emailContent);
+    }
+}
+
+Now that we have segregated the single responsibility principle in these multiple interfaces the next step is to implement these interfaces with object creation mechanisms.  GOF has defined many design patterns on object creations based on the requirements.
+
+Hence we strongly recommend you to refer to our design pattern tutorial for more details on creational design patterns.
+
+ 
+
+
+I believe this session has given you a good idea on how we can implement Single responsibility principle.
+
+In the next video we will discuss Interface Segregation Principle. 
