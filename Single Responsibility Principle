@@ -76,9 +76,4 @@ Now that we have segregated the single responsibility principle in these multipl
 
 Hence we strongly recommend you to refer to our design pattern tutorial for more details on creational design patterns.
 
- 
 
-
-I believe this session has given you a good idea on how we can implement Single responsibility principle.
-
-In the next video we will discuss Interface Segregation Principle. 
