@@ -1,0 +1,73 @@
+Interface seggregation principle-
+
+Clients should not be forced to depend on interfaces they do not use.
+
+
+In simpler terms:
+* An interface should only have methods that are relevant to the implementing class.
+* Don’t create fat interfaces (interfaces with lots of unrelated methods).
+* Instead, create smaller, more specific interfaces.
+
+
+
+public interface Worker {
+    void work();
+    void eat();
+    void sleep();
+}
+
+
+
+public class Robot implements Worker {
+    public void work() {
+        System.out.println("Robot working...");
+    }
+
+    public void eat() {
+        // Not applicable
+    }
+
+    public void sleep() {
+        // Not applicable
+    }
+}
+
+
+______
+
+
+public interface Workable {
+    void work();
+}
+
+public interface Eatable {
+    void eat();
+}
+
+public interface Sleepable {
+    void sleep();
+}
+
+
+
+public class Human implements Workable, Eatable, Sleepable {
+    public void work() {
+        System.out.println("Human working...");
+    }
+
+    public void eat() {
+        System.out.println("Human eating...");
+    }
+
+    public void sleep() {
+        System.out.println("Human sleeping...");
+    }
+
+
+
+public class Robot implements Workable {
+    public void work() {
+        System.out.println("Robot working...");
+    }
+}
+
