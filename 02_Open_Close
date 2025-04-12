@@ -1,0 +1,141 @@
+What is the Open/Closed Principle?
+The Open/Closed Principle says:
+"Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification."
+
+
+🧠 Meaning:
+* You should be able to add new behavior to a class without modifying its existing code.
+* This encourages writing code that is extensible (easy to add to) but stable (not easily broken).
+
+
+
+🧠 Meaning:
+* You should be able to add new behavior to a class without modifying its existing code.
+* This encourages writing code that is extensible (easy to add to) but stable (not easily broken).
+
+
+
+class Employee {
+    private String name;
+    private String type; // "FULL_TIME", "CONTRACT", "INTERN"
+
+    public Employee(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+}
+
+class BonusCalculator {
+    public double calculateBonus(Employee emp) {
+        if (emp.getType().equals("FULL_TIME")) {
+            return 1000.0;
+        } else if (emp.getType().equals("CONTRACT")) {
+            return 500.0;
+        } else if (emp.getType().equals("INTERN")) {
+            return 200.0;
+        }
+        return 0.0;
+    }
+}
+
+
+
+What’s wrong?
+* Every time a new employee type is added (e.g., "Part-Time"), we must modify BonusCalculator.
+* This violates the Open/Closed Principle.
+
+
+
+_______
+
+Fixing the same
+
+Create interface
+
+public interface Employee {
+    String getName();
+    double calculateBonus();
+}
+
+
+public class FullTimeEmployee implements Employee {
+    private String name;
+
+    public FullTimeEmployee(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double calculateBonus() {
+        return 1000.0;
+    }
+}
+
+
+
+public class ContractEmployee implements Employee {
+    private String name;
+
+    public ContractEmployee(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double calculateBonus() {
+        return 500.0;
+    }
+}
+
+
+
+public class InternEmployee implements Employee {
+    private String name;
+
+    public InternEmployee(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double calculateBonus() {
+        return 200.0;
+    }
+}
+
+
+
+public class BonusCalculator {
+    public double calculateBonus(Employee employee) {
+        return employee.calculateBonus();
+    }
+}
+
+
+________
+
+
+public class Main {
+    public static void main(String[] args) {
+        BonusCalculator calculator = new BonusCalculator();
+
+        Employee fullTime = new FullTimeEmployee("Alice");
+        Employee contractor = new ContractEmployee("Bob");
+        Employee intern = new InternEmployee("Charlie");
+
+        System.out.println(fullTime.getName() + " Bonus: " + calculator.calculateBonus(fullTime));
+        System.out.println(contractor.getName() + " Bonus: " + calculator.calculateBonus(contractor));
+        System.out.println(intern.getName() + " Bonus: " + calculator.calculateBonus(intern));
+    }
+}
