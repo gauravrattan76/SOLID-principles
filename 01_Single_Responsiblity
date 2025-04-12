@@ -1,0 +1,140 @@
+Solid Principles in Java-
+
+🔹 What is the Single Responsibility Principle?
+The Single Responsibility Principle states that:
+A class should have only one reason to change.
+In simpler terms:
+* A class should do one thing, and do it well.
+* It should have only one job or responsibility.
+
+
+
+
+
+Code -
+
+public class Employee {
+    private String name;
+    private String position;
+
+    // Responsibility 1: Manage employee data
+    public Employee(String name, String position) {
+        this.name = name;
+        this.position = position;
+    }
+
+    // Responsibility 2: Save to database
+    public void saveToDatabase() {
+        // code to save employee to DB
+    }
+
+    // Responsibility 3: Generate report
+    public String generateReport() {
+        return "Report for: " + name + ", Position: " + position;
+    }
+}
+
+
+_______________________
+
+
+This Employee class has multiple reasons to change:
+* Business rules for employee data
+* Database logic
+* Reporting format
+
+
+
+_______________
+
+
+public class Employee {
+    private String name;
+    private String position;
+
+    public Employee(String name, String position) {
+        this.name = name;
+        this.position = position;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+}
+
+
+__________________
+
+
+public class EmployeeRepository {
+    public void save(Employee employee) {
+        // Code to save employee to the database
+    }
+}
+
+
+____
+
+public class EmployeeReportGenerator {
+    public String generate(Employee employee) {
+        return "Report for: " + employee.getName() + ", Position: " + employee.getPosition();
+    }
+}
+
+_____________
+
+
+Now:
+* Employee only holds data
+* EmployeeRepository handles saving
+* EmployeeReportGenerator handles reporting
+Each class has one responsibility and one reason to change. Clean and modular!
+
+
+
+______________
+
+
+import java.util.PriorityQueue;
+
+public class Main {
+
+    public class Employee {
+        private String name;
+        private String position;
+
+        public Employee(String name, String position) {
+            this.name = name;
+            this.position = position;
+        }
+
+        public String getName(){
+            return name;
+        }
+
+        public String getPosition(){
+            return position;
+        }
+
+
+    }
+
+
+    public static void main(String[] args) {
+        Main m = new Main();
+        Main.Employee emp = m.new Employee("gaurav", "manager");
+        System.out.println(emp.getName());
+        System.out.println(emp.getPosition());
+
+
+    }
+}
+
+
+
+
+
